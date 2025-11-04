@@ -89,7 +89,7 @@ def animate_rotate_shrink(
 
         cv2.imshow(win_name, frame)
         key = cv2.waitKey(delay_ms) & 0xFF
-        if key == 27:  # ESC
+        if key == 27:  
             break
 
     cv2.destroyWindow(win_name)
