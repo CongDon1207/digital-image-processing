@@ -22,3 +22,33 @@ def read_image(path: str | Path) -> Optional[np.ndarray]:
         return img
     except Exception:
         return None
+
+def select_image_from_list(images_dir: Path = Path("images")) -> Optional[tuple[Path, np.ndarray]]:
+    """
+    Hiển thị danh sách ảnh và cho phép người dùng chọn một ảnh.
+    Trả về (path, img) nếu thành công, None nếu có lỗi.
+    """
+    paths = list_images(images_dir)
+    if not paths:
+        print("Không có ảnh trong thư mục.")
+        return None
+
+    print("Danh sách ảnh:")
+    for i, p in enumerate(paths, 1):
+        print(f"{i:02d} - {p.name}")
+    
+    sel = input(f"Chọn số thứ tự ảnh (1-{len(paths)}): ").strip()
+    try:
+        idx = int(sel)
+        assert 1 <= idx <= len(paths)
+    except Exception:
+        print("Lựa chọn không hợp lệ.")
+        return None
+
+    path = paths[idx - 1]
+    img = read_image(path)
+    if img is None:
+        print("Không đọc được ảnh đã chọn.")
+        return None
+    
+    return (path, img)
