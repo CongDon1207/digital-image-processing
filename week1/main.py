@@ -1,10 +1,8 @@
-import cv2
 from display import show_each_window, show_channels, show_gray, show_crop
 from io_utils import list_img, read_img, select_image_from_list
 from export_utils import export_three_formats
 from pathlib import Path
 from tranform_ops import animate_rotate_shrink
-from crop_ops import center_crop_quarter
 
 def run_check_read():
     """Kiểm tra đọc ảnh từ thư mục images."""
