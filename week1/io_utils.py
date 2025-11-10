@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from pathlib import Path
 from typing import List, Optional
+from tranform_ops import fit_resize
 
 FORMAT = {".png", ".bmp", ".jpg", ".jpeg"}
 
@@ -12,7 +13,7 @@ def read_img(path: str | Path) -> Optional[np.ndarray]:
     try:
         data = np.fromfile(str(p), dtype = np.uint8)
         img = cv2.imdecode(data, cv2.IMREAD_COLOR)
-        return img
+        return fit_resize(img)
     except Exception:
         return None
     

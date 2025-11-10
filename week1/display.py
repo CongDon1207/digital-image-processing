@@ -12,7 +12,7 @@ def show_window(win_name: str, img: np.ndarray, window_flag: int = cv2.WINDOW_AU
     cv2.setWindowProperty(win_name, window_prop, 1)
     cv2.imshow(win_name, img)
 
-def show_each_window(paths: Iterable[Path], max_w: int = 900, max_h: int = 700) -> None:
+def show_each_window(paths: Iterable[Path], max_w: int = 1200, max_h: int = 627) -> None:
     windows = []
 
     try:
@@ -38,7 +38,7 @@ def show_each_window(paths: Iterable[Path], max_w: int = 900, max_h: int = 700) 
 
 
 
-def show_gray(win_name: str, img: np.ndarray, max_w: int = 900, max_h: int = 700) -> None:
+def show_gray(win_name: str, img: np.ndarray, max_w: int = 1200, max_h: int = 627) -> None:
     gray = to_gray(img)
     new_gray = fit_resize(gray, max_w = max_w, max_h = max_h)
 
@@ -49,7 +49,7 @@ def show_gray(win_name: str, img: np.ndarray, max_w: int = 900, max_h: int = 700
     cv2.destroyAllWindows()
 
 
-def show_channels(img: np.ndarray, title_prefix: str = "", max_w: int = 900, max_h: int = 700) -> None:
+def show_channels(img: np.ndarray, title_prefix: str = "", max_w: int = 1200, max_h: int = 627) -> None:
 
     r, g, b = split_rgb(img)
     r = fit_resize(r, max_w = max_w, max_h = max_h)
@@ -68,7 +68,7 @@ def show_channels(img: np.ndarray, title_prefix: str = "", max_w: int = 900, max
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-def show_crop(win_name: str, img: np.ndarray, max_w: int = 900, max_h: int = 700) -> None:
+def show_crop(win_name: str, img: np.ndarray, max_w: int = 1200, max_h: int = 627) -> None:
     cropped = center_crop_quarter(img)
     new_cropped = fit_resize(cropped, max_w = max_w, max_h = max_h)
     show_window(win_name, new_cropped)

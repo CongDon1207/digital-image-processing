@@ -1,6 +1,6 @@
 from display import show_each_window, show_channels, show_gray, show_crop
 from io_utils import list_img, read_img, select_image_from_list
-from export_utils import export_three_formats
+from export_utils import export_two_formats
 from pathlib import Path
 from tranform_ops import animate_rotate_shrink
 
@@ -28,9 +28,8 @@ def run_export():
         return
     out_png = Path("images_png")
     out_jpg = Path("images_jpg")
-    out_bmp = Path("images_bmp")
     
-    total, ok_cnt  = export_three_formats(paths, out_png, out_jpg, out_bmp)
+    total, ok_cnt  = export_two_formats(paths, out_png, out_jpg)
     print(f"Hoàn thành: {ok_cnt}/{total} ảnh đã xuất đủ 3 định dạng.")
 
 def run_show_each_window():
@@ -66,11 +65,11 @@ def run_rotate_animation():
     print("Đang chạy hoạt hình (ESC để dừng sớm)...")
     animate_rotate_shrink(
         img_bgr=img,
-        steps=50,
-        angle_step=15.0,
-        scale_step=0.9,
+        steps=100,
+        angle_step=5.0,
+        scale_step=1,
         win_name=f"{path.stem}_ANIM",
-        delay_ms=90,
+        delay_ms=100,
         min_scale=0.001
     )
 
@@ -87,11 +86,11 @@ def main():
     choice = input(
         "Chọn tác vụ:\n"
         "1=check đọc\n"
-        "2=export ảnh ra 3 định dạng\n"
+        "2=export ảnh ra 2 định dạng\n"
         "3=hiển thị mỗi ảnh 1 cửa sổ\n"
         "4=tách ảnh màu thành 3 kênh (R,G,B)\n"
         "5=chuyển ảnh RGB sang xám\n"
-        "6=quay ảnh 50 lần (15°/bước) + thu nhỏ 0.9\n"
+        "6=quay ảnh 100 lần (5°/bước)\n"
         "7=crop trung tâm 1/4 ảnh\n> "
     ).strip()
 

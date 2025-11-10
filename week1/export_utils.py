@@ -31,15 +31,14 @@ def write_image_unicode(path: str | Path, image: np.ndarray , params: List[int] 
     except Exception:
         return False
     
-def export_three_formats(paths: Iterable[Path],
+def export_two_formats(paths: Iterable[Path],
                         out_png: str | Path,
-                        out_jpg: str | Path,
-                        out_bmp: str | Path                                        
+                        out_jpg: str | Path,                                     
 ) -> Tuple[int, int]:
     
     out_png = ensure_dir(out_png)
     out_jpg = ensure_dir(out_jpg)
-    out_bmp = ensure_dir(out_bmp)
+    
 
     total = 0
     cnt_ok = 0
@@ -55,17 +54,17 @@ def export_three_formats(paths: Iterable[Path],
 
         dst_png = out_png / f"{stem}.png"
         dst_jpg = out_jpg / f"{stem}.jpg"
-        dst_bmp = out_bmp / f"{stem}.bmp"
+        
 
         png_ok = write_image_unicode(dst_png, img)
         jpg_ok = write_image_unicode(dst_jpg, img)
-        bmp_ok = write_image_unicode(dst_bmp, img)
+        
 
-        if png_ok and jpg_ok and bmp_ok:
+        if png_ok and jpg_ok :
             cnt_ok += 1
             print(f"[OK] {src.name} -> PNG/BMP/JPG")
         else:
-            print(f"[ERR] Ghi lỗi: {src.name} (png={png_ok}, bmp={bmp_ok}, jpg={jpg_ok})")
+            print(f"[ERR] Ghi lỗi: {src.name} (png={png_ok}, jpg={jpg_ok})")
         
     return total, cnt_ok
 
