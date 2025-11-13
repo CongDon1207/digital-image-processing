@@ -91,7 +91,7 @@ def min_filter(A: np.ndarray, s: int) -> np.ndarray:
     B = np.clip(B, 0, 255).astype(A.dtype)
     return B
 
-def conv_avg(A: np.ndarray, K: np.ndarray) -> np.ndarray:
+def box_filter(A: np.ndarray, K: np.ndarray) -> np.ndarray:
  
     kh, kw = K.shape[:2]
     ph, pw = kh // 2, kw // 2  
@@ -146,4 +146,4 @@ def gauss_filter(A: np.ndarray, ksize: int = 3, sigma: float | None = None) -> n
     # kernel 2D bằng tích ngoài => chuẩn hoá sẽ do conv_avg xử lý
     K = np.outer(g1, g1)
 
-    return conv_avg(A, K.astype(np.float32))
+    return box_filter(A, K.astype(np.float32))

@@ -2,7 +2,15 @@ import cv2
 import numpy as np
 from typing import List, Optional
 from pathlib import Path
-from tranform_ops import fit_resize
+
+def fit_resize(img: np.ndarray, max_w: int = 900, max_h: int = 700) -> np.ndarray:
+
+    h, w = img.shape[:2]
+    scale = min(float(max_h/h) , float(max_w/w), 1.0)
+    if scale < 1.0:
+        new_size = (int(scale * w), int(scale * h))
+        img = cv2.resize(img, new_size, interpolation = cv2.INTER_AREA)
+    return img
 
 def read_image(path: str | Path) -> Optional[np.ndarray]:
     p = Path(path)
