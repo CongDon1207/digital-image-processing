@@ -10,6 +10,14 @@ def run_gui() -> None:
     root.title("Xu ly anh so")
     root.geometry("1000x500")
     root.resizable(True, True)
+    root.minsize(1024, 720)
+    try:
+        root.state("zoomed")
+    except tk.TclError:
+        try:
+            root.attributes("-zoomed", True)
+        except tk.TclError:
+            root.geometry("1400x900")
 
     controller = Controller()
     main_view = MainView(root, controller)
