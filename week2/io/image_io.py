@@ -3,7 +3,7 @@ import numpy as np
 from typing import List, Optional
 from pathlib import Path
 
-def fit_resize(img: np.ndarray, max_w: int = 900, max_h: int = 700) -> np.ndarray:
+def fit_resize(img: np.ndarray, max_w: int = 1200, max_h: int = 900) -> np.ndarray:
 
     h, w = img.shape[:2]
     scale = min(float(max_h/h) , float(max_w/w), 1.0)
