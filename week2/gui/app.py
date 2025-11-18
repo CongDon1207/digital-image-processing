@@ -2,11 +2,13 @@ import tkinter as tk
 from pathlib import Path
 
 from gui.controller import Controller
-from gui.views import MainView
+from gui.components.main_window import MainView
+from gui.theme import setup_theme
 
 
 def run_gui() -> None:
     root = tk.Tk()
+    setup_theme(root)
     root.title("Xu ly anh so")
     root.geometry("1000x500")
     root.resizable(True, True)

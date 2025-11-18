@@ -1,5 +1,5 @@
-from IO.image_io import read_image, fit_resize
-from gui.image_adapter import numpy_to_tk
+from IO.image_io import read_image, fit_resize, save_image
+from gui.utils import numpy_to_tk
 from pathlib import Path
 from tkinter import messagebox
 from typing import Callable
@@ -117,7 +117,7 @@ class Controller:
         else:
             img_to_save = self.current_image
 
-        ok = cv2.imwrite(str(path), img_to_save)
+        ok = save_image(img_to_save, path)
         if not ok:
             messagebox.showerror("Lưu ảnh", "Không thể ghi tệp đầu ra.")
         return ok
