@@ -362,3 +362,42 @@ def gaussian_highpass(
         return _apply_freq_filter(A, H, profile=True)
     else:
         return _apply_freq_filter(A, H, profile=False)
+
+
+
+
+def laplacian_sharpen(
+    A: np.ndarray,
+    c: float = 1e-5,
+    profile: bool = False,
+):
+    """
+        g(x,y) = f(x,y) - c * Laplacian(f)
+    
+    Chuyển sang tần số:
+        G(u,v) = F(u,v) - c * (-D^2 * F(u,v))
+               = F(u,v) * (1 + c * D^2)
+
+    - A : ảnh đầu vào.
+    - c : hệ số sắc nét. 
+          Lưu ý: Vì D^2 rất lớn (hàng chục nghìn), c phải rất nhỏ (ví dụ 1e-5 hay 1e-6) 
+          để ảnh không bị cháy sáng.
+    """
+    if A.ndim == 2:
+        rows, cols = A.shape
+    else:
+        rows, cols = A.shape[:2]
+
+    # Tận dụng hàm tính khoảng cách có sẵn
+    D = _build_distance_matrix(rows, cols)
+    
+    # Tạo bộ lọc Sharpen: H = 1 + c * D^2
+    # Dùng float32 để tránh tràn số khi D^2 lớn
+    H = 1.0 + float(c) * (D ** 2)
+    H = H.astype(np.float32)
+
+    # Gọi hàm apply có sẵn
+    if profile:
+        return _apply_freq_filter(A, H, profile=True)
+    else:
+        return _apply_freq_filter(A, H, profile=False)
