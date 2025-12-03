@@ -1,3 +1,9 @@
 venv/
 images/
-__pycache__
+22133013_*/
+# Ignore files and directories starting with "22133013_"
+22133013_*
+__pycache__/
+AGENTS.md
+CHANGELOG.md
+HANDOFF.md
